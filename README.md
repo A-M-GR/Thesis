@@ -1,2 +1,2 @@
 # Thesis
-BC Thesis
+BSc  Thesis
