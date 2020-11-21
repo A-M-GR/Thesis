@@ -1,0 +1,4 @@
+include ':mysql-connector-java-5.1.49-bin'
+include ':mysql1-connector-java-5.1.49'
+include ':app'
+rootProject.name='Pragmatikh efarmogh'
