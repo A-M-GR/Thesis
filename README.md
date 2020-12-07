@@ -8,7 +8,7 @@ connection = DriverManager.getConnection("url of your database", "DB_Username", 
 To create a DB_Username and DB_Password you should create a new user inside your database using the phpMyAdmin tool.
 Moreover, you should get a new Google Maps API key in order to use the map screen. 
 This URL will be very helpful
-https://developers.google.com/maps/documentation/android-sdk/overview
+https://developers.google.com/maps/documentation/android-sdk/overview.
 
 # Website
 
