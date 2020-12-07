@@ -1,2 +1,2 @@
 # Thesis
-BSc  Thesis
+BSc  Thesis Andreas Maragkakis
