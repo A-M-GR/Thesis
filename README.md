@@ -17,8 +17,8 @@ This website uses XAMPP services. This file should be inside the "htdocs" file o
 Moreover inside the "Connection.php" file, you can connect your website with your database. 
 
 # Database
-I create a database using the PHPmyAdmin tool of the XAMPP. 
-Inside the database, I create two tables: main_table and user_problem_text.Main_table has 2 columns 
+I create a database named "test" using the PHPmyAdmin tool of the XAMPP. 
+Inside the database, I create two tables: main_table and user_problem_text. Main_table has 2 columns 
 Username and password and the user_problem_text has also two columns named problem_text and location.
 
 
