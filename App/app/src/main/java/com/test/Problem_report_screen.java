@@ -105,8 +105,7 @@ public class Problem_report_screen extends AppCompatActivity {
 
 
                 Class.forName("com.mysql.jdbc.Driver");
-                 connection = DriverManager.getConnection("jdbc:mysql://192.168.1.78:3306/test", "Sboukis", "1234");
-
+                 connection = DriverManager.getConnection("url of your database", "DB_Username", "DB_Password");
 
                 if (connection == null) {
 
