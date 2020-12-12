@@ -93,7 +93,7 @@ public class Register_Screen extends AppCompatActivity {
 
 
                 Class.forName("com.mysql.jdbc.Driver");
-                 connection = DriverManager.getConnection("url of your database", "DB_Username", "DB_Password");
+                connection = DriverManager.getConnection("url of your database", "DB_Username", "DB_Password");
 
                 if (connection == null) {
                   // Connection goes wrong
@@ -125,7 +125,8 @@ public class Register_Screen extends AppCompatActivity {
                 connection.close();
 
 
-            } catch (SQLException e) {
+            }
+            catch (SQLException e) {
 
                 try {
                     connection.close();

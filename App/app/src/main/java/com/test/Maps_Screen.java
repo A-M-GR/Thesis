@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -29,7 +30,7 @@ public class Maps_Screen extends FragmentActivity implements OnMapReadyCallback 
     private static final float DEFAULT_ZOOM = 15f;
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-
+    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     private boolean mLocationPermisionGranded = false;
 
@@ -50,14 +51,17 @@ public class Maps_Screen extends FragmentActivity implements OnMapReadyCallback 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-       String [] permisions = {Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION};
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        String[] permisions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION};
 
-              mLocationPermisionGranded=true;
+        if(checkLocationPermission())
+        {
+            mLocationPermisionGranded = true;
             getDeviceLocation();
-            mMap.setMyLocationEnabled(true);
 
-            Intent receiveIntent = this.getIntent();
+            mMap.setMyLocationEnabled(true);
+        }
+
+         Intent receiveIntent = this.getIntent();
             boolean b = receiveIntent.getBooleanExtra("All ok",false);  //from Problem_report_screen
             if(b)
                 Toast.makeText(Maps_Screen.this, "Problem send" , Toast.LENGTH_LONG).show();
@@ -86,7 +90,7 @@ public class Maps_Screen extends FragmentActivity implements OnMapReadyCallback 
             });
         }
         
-    }
+
 
 
 
@@ -106,7 +110,10 @@ public class Maps_Screen extends FragmentActivity implements OnMapReadyCallback 
                 public void onComplete(@NonNull Task task) {
 
 
-                    if (ActivityCompat.checkSelfPermission(Maps_Screen.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(Maps_Screen.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+
+                      if( checkLocationPermission())
+                      {
                         Location currentLocation = (Location) task.getResult();
                         moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()), DEFAULT_ZOOM);
 
@@ -120,6 +127,7 @@ public class Maps_Screen extends FragmentActivity implements OnMapReadyCallback 
         catch (SecurityException e)
         {
                 e.printStackTrace();
+
         }
     }
 
@@ -131,6 +139,31 @@ public class Maps_Screen extends FragmentActivity implements OnMapReadyCallback 
         mMap.addMarker(options);
 
     }
+
+
+
+
+
+
+    public boolean checkLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+
+            return false;
+        }
+
+        else
+
+            {
+            return true;
+        }
+    }
+
 
 
 }
